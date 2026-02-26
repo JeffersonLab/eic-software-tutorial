@@ -17,6 +17,10 @@ This instruction goes through these steps:
 ## Quick start tutorial
 
 ```bash
+# == 0 == Install eic-shell
+# https://eic.github.io/tutorial-setting-up-environment/setup.html
+curl --location https://get.epic-eic.org | bash
+
 # == 1 == Assuming eic-shell is installed
 # on ifarm: 
 ./eic-shell
