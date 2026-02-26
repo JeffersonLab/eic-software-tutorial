@@ -67,9 +67,7 @@ source /opt/detector/epic-main/bin/thisepic.sh
 # epic_craterlake_10x130.xml
 # epic_craterlake_10x100.xml
 # epic_craterlake_5x41.xml
-
- 
-ddsim --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles sim_input.hepmc
+npsim --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles sim_input.hepmc
 
 # == 5 == Run EICrecon reconstruction
 # (!) Use the same geometry/detector as for simulation
@@ -210,6 +208,12 @@ Use `abconv --help` or follow the [instruction of how to use the afterburner](ht
 # or one can set the default detector (now points to epic-nightly)
 source /opt/detector/epic-main/bin/thisepic.sh
 
+# (!) you should use a compact file corresponding to paritcular beam energy
+# epic_craterlake_10x275.xml
+# epic_craterlake_10x130.xml
+# epic_craterlake_10x100.xml
+# epic_craterlake_5x41.xml
+
 # Run simulation for 1000 events
 npsim --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles mceg.hepmc
 ```
@@ -218,13 +222,13 @@ npsim --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml -N=1000 --outputFi
 
 There are at least 2 ways of how to run a particle gun:
 
--   using ddsim command line
+-   using npsim command line
 -   using geant macro file and invoke GPS
 
 
-### Using ddsim
+### Using ddsim/npsim
 
-Using ddsim (wrapper around ddsim) command line:
+Using npsim (wrapper around ddsim) command line:
 
 ```bash
 # set the detector
@@ -250,7 +254,7 @@ npsim --help
 GPS is configured in Geant4 macro files. An example of such file
 [may be found here](https://eicweb.phy.anl.gov/EIC/detectors/athena/-/blob/master/macro/gps.mac)
 
-To run ddsim with GPS you have to add [\--enableG4GPS]{.title-ref} flag
+To run npsim with GPS you have to add [\--enableG4GPS]{.title-ref} flag
 and specify Geant4 macro file:
 
 ```bash
