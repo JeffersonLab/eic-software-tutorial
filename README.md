@@ -222,13 +222,17 @@ npsim --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml -N=1000 --outputFi
 
 There are at least 2 ways of how to run a particle gun:
 
--   using npsim command line
--   using geant macro file and invoke GPS
+1. using npsim command line - simple and basic
+2. using geant macro file and invoke Geant GPS (General Particle Source) - advanced options such as e.g. polarisation, tuning of distributions, etc.
+3. generate HepMC file with particles and pass them through afterburner - enables beam effects. Outside of scope of this tutorial (look hepMC tutorials). 
+
+> (!) for 1 and 2, you set up particles properties of particle gun manually, i.e. afterburner is not used, there is no beam effects and you are responsible for setting correct crossing angle if you need one. 
+Option 3 is basically creating your own MC file. 
+
+### Using CLI particle gun
 
 
-### Using ddsim/npsim
-
-Using npsim (wrapper around ddsim) command line:
+Using npsim (wrapper around ddsim) simple particle gun from command line:
 
 ```bash
 # set the detector
@@ -247,15 +251,17 @@ npsim --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml -N=2 --random.seed
 npsim --help
 ```
 
-### Using Geant4 macros GPS
+### Using Geant4  GPS
 
 [GPS stands for General Particle Source (tutorial)](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/generalParticleSource.html)
+
+It allows many advanced settings such as specifications of the spectral, spatial and angular distribution of the primary source particles. 
+For EIC it is especially relevant as it allows to set polarisation
 
 GPS is configured in Geant4 macro files. An example of such file
 [may be found here](https://eicweb.phy.anl.gov/EIC/detectors/athena/-/blob/master/macro/gps.mac)
 
-To run npsim with GPS you have to add [\--enableG4GPS]{.title-ref} flag
-and specify Geant4 macro file:
+To run npsim with GPS you have to add `--enableG4GPS` flag and specify Geant4 macro file via `--macro` flag (you put GPS configuation there):
 
 ```bash
 npsim --runType run --compactFile=$DETECTOR_PATH/epic_craterlake_10x100.xml --enableG4GPS --macro $DETECTOR_PATH/macro/gps.mac --outputFile gps_example.root
